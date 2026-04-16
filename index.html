@@ -8,210 +8,55 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; overflow: hidden; height: 100vh; }
         
-        #app { display: grid; grid-template-columns: 200px 1fr 240px; grid-template-rows: 60px 1fr; height: 100vh; padding: 15px; gap: 15px; }
+        #app { display: grid; grid-template-columns: 200px 1fr 260px; grid-template-rows: 60px 1fr; height: 100vh; padding: 15px; gap: 15px; }
         
-        /* Header - Slimmer */
-        .header { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; background: var(--card); padding: 0 20px; border-radius: 10px; border: 1px solid #1a1a22; }
-        h1 { font-family: 'Instrument Serif', serif; font-size: 1.3rem; font-weight: 400; }
-        .settings-btn { background: #1a1a22; border: 1px solid #333; color: var(--dim); padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: 0.2s; }
-        .settings-btn:hover { color: white; border-color: var(--dim); }
+        /* Header - Tightened */
+        .header { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; background: var(--card); padding: 0 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        h1 { font-family: 'Instrument Serif', serif; font-size: 1.4rem; font-weight: 400; letter-spacing: -0.02em; }
+        .settings-btn { background: #1a1a22; border: 1px solid #333; color: var(--dim); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.75rem; transition: 0.2s; }
+        .settings-btn:hover { color: white; border-color: var(--accent); }
 
         /* Sidebar Left - Projects */
-        .sidebar-left { background: var(--card); border-radius: 10px; padding: 15px; display: flex; flex-direction: column; gap: 10px; }
-        .label { font-size: 0.6rem; color: var(--dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        .project-item { padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; color: var(--dim); border: 1px solid transparent; transition: 0.2s; }
-        .project-item:hover { background: #1a1a22; color: var(--text); }
-        .project-item.active { background: #1a1a22; color: var(--gold); border-color: #333; }
-        .add-project { background: none; border: 1px dashed #333; color: var(--dim); padding: 8px; border-radius: 6px; cursor: pointer; font-size: 0.7rem; margin-top: auto; }
+        .sidebar-left { background: var(--card); border-radius: 12px; padding: 20px 15px; display: flex; flex-direction: column; gap: 8px; border: 1px solid rgba(255,255,255,0.05); }
+        .label { font-size: 0.65rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; font-weight: 500; }
+        .project-item { padding: 10px 12px; border-radius: 8px; font-size: 0.85rem; cursor: pointer; color: var(--dim); transition: 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .project-item:hover { background: rgba(255,255,255,0.03); color: var(--text); }
+        .project-item.active { background: rgba(123,110,246,0.1); color: var(--gold); font-weight: 500; }
+        .add-project { background: none; border: 1px dashed #333; color: var(--dim); padding: 10px; border-radius: 8px; cursor: pointer; font-size: 0.75rem; margin-top: auto; transition: 0.2s; }
+        .add-project:hover { border-color: var(--dim); color: var(--text); }
 
-        /* Editor */
-        .editor-wrap { position: relative; background: var(--card); border-radius: 10px; border: 1px solid #1a1a22; overflow: hidden; }
-        textarea { width: 100%; height: 100%; background: transparent; border: none; color: white; padding: 30px; font-family: 'DM Mono', monospace; font-size: 1rem; line-height: 1.7; outline: none; resize: none; }
-        .word-count { position: absolute; bottom: 15px; right: 15px; background: #0c0c0f; padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; color: var(--gold); border: 1px solid #1a1a22; }
+        /* Editor Container */
+        .editor-wrap { position: relative; background: var(--card); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        textarea { width: 100%; height: 100%; background: transparent; border: none; color: white; padding: 40px; font-family: 'DM Mono', monospace; font-size: 1.05rem; line-height: 1.8; outline: none; resize: none; }
+        .word-count { position: absolute; bottom: 20px; right: 20px; background: var(--bg); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; color: var(--gold); border: 1px solid #1a1a22; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
 
-        /* Sidebar Right - Buddy */
+        /* Sidebar Right - Stats */
         .sidebar-right { display: flex; flex-direction: column; gap: 15px; }
-        .card { background: var(--card); padding: 20px; border-radius: 10px; border: 1px solid #1a1a22; text-align: center; }
-        .buddy-emoji { font-size: 3.5rem; display: block; margin-bottom: 10px; transition: 0.3s; }
+        .card { background: var(--card); padding: 25px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); text-align: center; }
+        .buddy-emoji { font-size: 3.8rem; display: block; margin-bottom: 12px; transition: 0.3s; }
         
         .floating { animation: float 3s ease-in-out infinite; }
-        @keyframes float { 50% { transform: translateY(-8px); } }
-        .celebrate { animation: shake 0.5s ease-in-out infinite; filter: drop-shadow(0 0 10px var(--gold)); }
-        @keyframes shake { 0%, 100% { transform: rotate(-5deg) scale(1.1); } 50% { transform: rotate(5deg) scale(1.1); } }
+        @keyframes float { 50% { transform: translateY(-10px); } }
+        .celebrate { animation: bounce 0.5s ease-in-out infinite; filter: drop-shadow(0 0 12px var(--gold)); }
+        @keyframes bounce { 0%, 100% { transform: translateY(0) scale(1.1); } 50% { transform: translateY(-15px) scale(1.1); } }
 
-        .progress-track { width: 100%; height: 4px; background: #222; border-radius: 10px; margin-top: 8px; overflow: hidden; }
-        #progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--gold)); transition: 0.4s; }
+        .progress-track { width: 100%; height: 5px; background: #222; border-radius: 10px; margin-top: 10px; overflow: hidden; }
+        #progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--gold)); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
 
         /* Modal */
-        #modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; z-index: 100; }
-        .modal-content { background: #18181f; padding: 25px; border-radius: 12px; width: 320px; border: 1px solid #333; }
-        input { width: 100%; background: #0c0c0f; border: 1px solid #333; color: white; padding: 10px; border-radius: 6px; margin: 8px 0 15px 0; font-family: 'DM Mono'; }
-        .buddy-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 15px; }
-        .buddy-opt { background: #1a1a22; border: 1px solid #333; border-radius: 6px; padding: 8px; cursor: pointer; font-size: 1.1rem; }
-        .selected { border-color: var(--accent); background: rgba(123, 110, 246, 0.1); }
-        .save-btn { width: 100%; background: var(--accent); color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        #modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; z-index: 100; backdrop-filter: blur(4px); }
+        .modal-content { background: #18181f; padding: 30px; border-radius: 16px; width: 340px; border: 1px solid #333; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        input { width: 100%; background: #0c0c0f; border: 1px solid #333; color: white; padding: 12px; border-radius: 8px; margin: 8px 0 20px 0; font-family: 'DM Mono'; font-size: 0.9rem; outline: none; }
+        input:focus { border-color: var(--accent); }
+        .buddy-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 25px; }
+        .buddy-opt { background: #1a1a22; border: 1px solid #333; border-radius: 10px; padding: 10px; cursor: pointer; font-size: 1.3rem; transition: 0.2s; }
+        .selected { border-color: var(--accent); background: rgba(123, 110, 246, 0.15); transform: scale(1.05); }
+        .save-btn { width: 100%; background: var(--accent); color: white; border: none; padding: 14px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
+        .save-btn:hover { opacity: 0.9; transform: translateY(-1px); }
     </style>
 </head>
 <body>
 
 <div id="modal">
     <div class="modal-content">
-        <h2 style="font-family: 'Instrument Serif'; margin-bottom: 15px;">Settings</h2>
-        <label class="label">Profile Name</label>
-        <input type="text" id="nameInput">
-        <label class="label">Daily Word Goal</label>
-        <input type="number" id="goalInput">
-        <label class="label">Buddy</label>
-        <div class="buddy-grid" id="buddyPicker"></div>
-        <button class="save-btn" onclick="saveSettings()">Save Changes</button>
-    </div>
-</div>
-
-<div id="app">
-    <div class="header">
-        <h1>Welcome, <span id="displayName" style="color: var(--gold); font-style: italic;">Writer</span></h1>
-        <button class="settings-btn" onclick="toggleModal(true)">⚙ Settings</button>
-    </div>
-
-    <div class="sidebar-left">
-        <p class="label">Projects</p>
-        <div id="projectList"></div>
-        <button class="add-project" onclick="addProject()">+ New Project</button>
-    </div>
-
-    <div class="editor-wrap">
-        <textarea id="editor" placeholder="Write something great..."></textarea>
-        <div class="word-count"><span id="count">0</span> words</div>
-    </div>
-
-    <div class="sidebar-right">
-        <div class="card">
-            <span id="buddyEmoji" class="buddy-emoji floating">👻</span>
-            <p id="buddyTalk" style="font-size: 0.75rem; color: #d0cce0; line-height: 1.4;"></p>
-        </div>
-        <div class="card" style="text-align: left;">
-            <p class="label">Daily Goal</p>
-            <div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 0.85rem;">
-                <span id="statProgress">0</span>
-                <span style="color: var(--dim);" id="statGoal">/ 500</span>
-            </div>
-            <div class="progress-track"><div id="progress-fill"></div></div>
-            <p id="streakDisplay" style="font-size: 0.65rem; color: var(--accent); margin-top: 10px; font-weight: bold;"></p>
-        </div>
-    </div>
-</div>
-
-<script>
-    const BUDDIES = [
-        { id: "ghost", emoji: "👻", idle: "Boo! Write something...", hot: "GOAL MET! Spooky is dancing!" },
-        { id: "dragon", emoji: "🐉", idle: "The dragon waits...", hot: "FIRE! Goal achieved!" },
-        { id: "robot", emoji: "🤖", idle: "Awaiting input...", hot: "SYSTEM OPTIMIZED." },
-        { id: "cat", emoji: "🐱", idle: "...zzzz", hot: "Fine. Good job. 🐾" },
-        { id: "owl", emoji: "🦉", idle: "Wisdom awaits.", hot: "A MASTERPIECE!" }
-    ];
-
-    let state = JSON.parse(localStorage.getItem('buddyData')) || {
-        userName: "Writer",
-        dailyGoal: 500,
-        buddyId: "ghost",
-        streak: 0,
-        lastStreakDate: null,
-        currentProject: "Novel",
-        projects: { "Novel": "" }
-    };
-
-    const editor = document.getElementById('editor');
-
-    function toggleModal(show) {
-        document.getElementById('modal').style.display = show ? 'flex' : 'none';
-        if(show) {
-            document.getElementById('nameInput').value = state.userName;
-            document.getElementById('goalInput').value = state.dailyGoal;
-            renderBuddyPicker();
-        }
-    }
-
-    function renderBuddyPicker() {
-        const picker = document.getElementById('buddyPicker');
-        picker.innerHTML = '';
-        BUDDIES.forEach(b => {
-            const btn = document.createElement('button');
-            btn.className = `buddy-opt ${state.buddyId === b.id ? 'selected' : ''}`;
-            btn.innerHTML = b.emoji;
-            btn.onclick = () => { state.buddyId = b.id; renderBuddyPicker(); };
-            picker.appendChild(btn);
-        });
-    }
-
-    function saveSettings() {
-        state.userName = document.getElementById('nameInput').value || "Writer";
-        state.dailyGoal = parseInt(document.getElementById('goalInput').value) || 500;
-        sync();
-        toggleModal(false);
-    }
-
-    function addProject() {
-        const name = prompt("Project Name:");
-        if(name && !state.projects[name]) {
-            state.projects[name] = "";
-            switchProject(name);
-        }
-    }
-
-    function switchProject(name) {
-        state.projects[state.currentProject] = editor.value; // Save current
-        state.currentProject = name;
-        editor.value = state.projects[name]; // Load new
-        sync();
-    }
-
-    function sync() {
-        localStorage.setItem('buddyData', JSON.stringify(state));
-        updateUI();
-    }
-
-    function updateUI() {
-        const text = editor.value;
-        const wc = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
-        const buddy = BUDDIES.find(b => b.id === state.buddyId);
-        const reachedGoal = wc >= state.dailyGoal;
-
-        const emojiEl = document.getElementById('buddyEmoji');
-        emojiEl.className = `buddy-emoji ${reachedGoal ? 'celebrate' : 'floating'}`;
-
-        document.getElementById('displayName').innerText = state.userName;
-        document.getElementById('count').innerText = wc;
-        document.getElementById('statProgress').innerText = wc;
-        document.getElementById('statGoal').innerText = `/ ${state.dailyGoal}`;
-        document.getElementById('buddyEmoji').innerText = buddy.emoji;
-        document.getElementById('buddyTalk').innerText = reachedGoal ? buddy.hot : buddy.idle;
-        document.getElementById('streakDisplay').innerText = state.streak > 0 ? `🔥 ${state.streak} DAY STREAK` : "";
-        document.getElementById('progress-fill').style.width = Math.min((wc / state.dailyGoal) * 100, 100) + "%";
-
-        // Render Projects
-        const list = document.getElementById('projectList');
-        list.innerHTML = '';
-        Object.keys(state.projects).forEach(p => {
-            const item = document.createElement('div');
-            item.className = `project-item ${state.currentProject === p ? 'active' : ''}`;
-            item.innerText = `• ${p}`;
-            item.onclick = () => switchProject(p);
-            list.appendChild(item);
-        });
-    }
-
-    editor.addEventListener('input', (e) => {
-        updateUI();
-        if (e.data === '.') {
-            state.projects[state.currentProject] = editor.value;
-            sync();
-        }
-    });
-
-    // Load initial project text
-    editor.value = state.projects[state.currentProject] || "";
-    updateUI();
-</script>
-
-</body>
-</html>
+        <h2 style="
